@@ -92,6 +92,7 @@ router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) =>
 
 app.use("/api/v1", router)
 
+export default app; // para q funcione vercel
 
 //puerto PORT... comentado para q funcione en desarrollo vercel
 // app.listen(PORT, () => {
