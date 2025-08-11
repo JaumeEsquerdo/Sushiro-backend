@@ -30,7 +30,17 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads'))) 
 
 
 
-conectarDB();
+// conectarDB();
+
+app.use(async (req, res, next) => {
+    try {
+        await conectarDB();
+        next();
+    } catch (err) {
+        console.error('Error de conexión Mongo:', err.message);
+        res.status(500).json({ msg: 'Error de conexión con la base de datos' });
+    }
+});
 
 //RUTAS FRONT
 //limpiar la terminal cada vez que reinicio proyecto
@@ -61,7 +71,8 @@ router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) =>
         if (!req.file) {
             return res.status(400).json({
                 success: false,
-                message: "No se ha proporcionado una imagen"           })
+                message: "No se ha proporcionado una imagen"
+            })
         }
         //  console.log(req.file)
 
