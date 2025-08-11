@@ -61,7 +61,7 @@ router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) =>
         if (!req.file) {
             return res.status(400).json({
                 success: false,
-                message: "No se ha proporcionado una imagen" /           })
+                message: "No se ha proporcionado una imagen"           })
         }
         //  console.log(req.file)
 
