@@ -54,40 +54,40 @@ app.get("/", (req, res) => {
 
 // ruta para subir imagen de producto
 // usamos el middleware de multer para procesar "imgprod"
-router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) => {
-    try {
+// router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) => {
+//     try {
 
-        if (!req.file) {
-            return res.status(400).json({
-                success: false,
-                message: "No se ha proporcionado una imagen"
-            })
-        }
-        console.log(req.file)
+//         if (!req.file) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: "No se ha proporcionado una imagen"
+//             })
+//         }
+//         console.log(req.file)
 
-        // recibir img
-        const imageUrl = `${BACKEND_URL}/uploads/${req.file.filename}`
+//         // recibir img
+//         const imageUrl = `${BACKEND_URL}/uploads/${req.file.filename}`
 
 
-        //guardar req.file.filename en la base de datos no la url porq puede ser calhost, vercel....
+//         //guardar req.file.filename en la base de datos no la url porq puede ser calhost, vercel....
 
-        //response al usuario
-        return res.status(200).json({
-            success: "ok",
-            message: "imagen subida con éxito",
-            fileData: req.file,
-            data: {
-                imageUrl: imageUrl,
-                filename: req.file.filename,
-                originalName: req.file.originalname,
-                size: req.file.size,
-                peso: `${Math.round(req.file.size / 1024)} KBytes`
-            }
-        })
-    } catch (e) {
-        next(e)
-    }
-});
+//         //response al usuario
+//         return res.status(200).json({
+//             success: "ok",
+//             message: "imagen subida con éxito",
+//             fileData: req.file,
+//             data: {
+//                 imageUrl: imageUrl,
+//                 filename: req.file.filename,
+//                 originalName: req.file.originalname,
+//                 size: req.file.size,
+//                 peso: `${Math.round(req.file.size / 1024)} KBytes`
+//             }
+//         })
+//     } catch (e) {
+//         next(e)
+//     }
+// });
 
 
 app.use("/api/v1", router)
