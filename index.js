@@ -35,21 +35,21 @@ conectarDB();
 //RUTAS FRONT
 //limpiar la terminal cada vez que reinicio proyecto
 console.clear();
-app.get("/", (req, res) => {
-    // res.send("Bienvenidos a nuestra API con express y mongo")
-    const landingHtml = `
-    <h2>Hola </h2>
-    <p>Bienvenidos a la prueba del backend para ponerlo en Varcel</p>
-    <hr>
-    <h2>Upload de archivos </h2>
-    <form action="/api/v1/producto/upload" method="POST" enctype="multipart/form-data">
-    <input type="file" name="imgprod" />
-    <button type="submit">Subir imagen </button>
-    </form>
-    `;
-    res.send(landingHtml)
+// app.get("/", (req, res) => {
+//     // res.send("Bienvenidos a nuestra API con express y mongo")
+//     const landingHtml = `
+//     <h2>Hola </h2>
+//     <p>Bienvenidos a la prueba del backend para ponerlo en Varcel</p>
+//     <hr>
+//     <h2>Upload de archivos </h2>
+//     <form action="/api/v1/producto/upload" method="POST" enctype="multipart/form-data">
+//     <input type="file" name="imgprod" />
+//     <button type="submit">Subir imagen </button>
+//     </form>
+//     `;
+//     res.send(landingHtml)
 
-})
+// })
 
 
 // ruta para subir imagen de producto
