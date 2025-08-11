@@ -1,0 +1,34 @@
+@dominio = http://localhost:3000
+@uid=67d2134192e8a897b6d1f3ed
+
+
+### create mesas
+POST {{dominio}}/api/v1/mesas
+Content-Type: application/json
+
+{
+  "numero": 4,
+  "estado": "libre"
+}
+
+
+### get usuario
+GET {{dominio}}/api/v1/usuarios/{{uid}}
+
+### post de producto
+POST {{dominio}}/api/v1/productos
+Content-Type: application/json
+
+{
+    "name": "Tempura Udon con Curry",
+    "descripcion": "Fideos udon con caldo de curry y tempura de camarón.",
+    "precio": 14,
+    "img": "imgprod-2025-07-08T15-49-40-624Z.jpeg",
+    "tipo": "tempura"
+}
+
+### get producto
+GET {{dominio}}/api/v1/productos/{{uid}}
+
+### get productos
+GET {{dominio}}/api/v1/productos
