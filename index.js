@@ -30,17 +30,6 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'public/uploads'))) 
 
 
 
-// conectarDB();
-
-app.use(async (req, res, next) => {
-    try {
-        await conectarDB();
-        next();
-    } catch (err) {
-        console.error('Error de conexión Mongo:', err.message);
-        res.status(500).json({ msg: 'Error de conexión con la base de datos' });
-    }
-});
 
 //RUTAS FRONT
 //limpiar la terminal cada vez que reinicio proyecto
@@ -61,7 +50,6 @@ app.get("/", (req, res) => {
 // <input type="file" name="imgprod" />
 // <button type="submit">Subir imagen </button>
 // </form>
-
 
 // ruta para subir imagen de producto
 // usamos el middleware de multer para procesar "imgprod"
@@ -101,7 +89,22 @@ router.post("/producto/upload", uploadImg.single('imgprod'), (req, res, next) =>
 });
 
 
+// conectarDB();
+
+/* middleware para asegurar que antes de cada request exista una conexión válida */
+app.use('/api/v1', async (req, res, next) => {
+    try { await conectarDB(); next(); }
+    catch (err) { console.error('Mongo:', err.message); res.status(500).json({ msg: 'DB down' }); }
+});
+
+
 app.use("/api/v1", router)
+
+// manejador de errores
+app.use((err, req, res, next) => {
+    console.error(err)
+    res.status(500).json({ msg: 'Error  interno del servidor' })
+})
 
 export default app; // para q funcione vercel
 
